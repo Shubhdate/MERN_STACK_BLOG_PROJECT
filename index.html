@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERN STACK</title>
+</head>
+<body>
+    <center><h1>MERN STACK WITH BLOG PROJECT</h1> </center>
+
+    Creating a blog website using React, Node, Express, Mongodb - <br>
+
+    installing dependices - react js, tailwind css, react-router-dom <br>
+    <!--
+        command in terminal 
+        npx create-react-app client 
+    -->
+
+    Creating Blog Pages - <br>
+    <!--
+        import Home from "./pages/Home";
+import Article from "./pages/Article";
+import ArticlesList from "./pages/ArticlesList";
+import About from "./pages/About";
+
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+
+
+
+function App() {
+  return (
+    <Router>
+      <div className="max-w-screen-md mx-auto pt-20">
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/articles-list' element={<ArticlesList />} />
+          <Route path='/article' element={<Article />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+    -->
+
+    Creating Navbar componenet - <br>
+    <!--
+    from navbar.js
+    import React from 'react'
+import {Link} from 'react-router-dom'
+
+const Navbar = () => {
+  return (
+    <nav className='border-b-4 border-green-700 text-center fixed top-0 bg-green-600 font-bold w-full text-lg text-white'>
+        <ul>
+            <li className='inline-block py-4'>
+                <Link to="/" className='pl-6 pr-8'>Home</Link>
+            </li>
+            <li className='inline-block py-4'>
+                <Link to="/about" className='pl-6 pr-8'>About</Link>
+            </li>
+            <li className='inline-block py-4'>
+                <Link to="/articles-list" className='pl-6 pr-8'>Articles</Link>
+            </li>
+        </ul>  
+
+    </nav>
+  )
+}
+
+export default Navbar
+
+
+    from app.js
+    //components
+import Navbar from "./components/Navbar";
+
+
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+
+
+
+function App() {
+  return (
+    <Router>
+      <Navbar />
+    -->
+
+
+    URL parameters with react-router - <br>
+    <!--
+   from article.js
+   import React from 'react'
+import { useParams } from 'react-router-dom';
+import articleContent from './Article-content';
+
+const Article = () => {
+    const {name} = useParams();
+    const article = articleContent.find((article) => 
+        article.name === name
+    );
+
+
+    if(!article) return <h1>Article does not exist</h1>//if there is not article exist then we will get this message
+
+
+  return (
+    <div className='mb-20'>
+        <h1 className='sm:text-4xl text-2xl font-bold my-6 text-gray-900'>
+            {article.title}
+        </h1>
+        {article.content.map((paragraph, index)=> (
+            <p className='mx-auto leading-relaxed text-base mb-4' key={index}>{paragraph}</p>
+        ))}
+        
+    </div>
+  )
+}
+
+export default Article
+
+
+from article-content.js
+const articles = [
+    {
+        name: "learn-react",
+        title: "The Fastest Way to Leran React",
+        thumbnail: "/images/blog1.jpg",
+        content: [
+            `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est eveniet doloremque aspernatur modi sunt iusto labore ducimus eos quae, numquam consectetur eum earum hic veritatis nisi nesciunt maxime quam error eaque. Magnam a ducimus vitae repudiandae doloribus quaerat, cum ratione dolorum provident excepturi pariatur aliquid ut laboriosam tempora tempore distinctio! Quod magnam, voluptatum iste dicta praesentium neque fuga sed illum deleniti laudantium ipsam molestias facere earum! Aspernatur aperiam veniam at sunt incidunt saepe, reprehenderit veritatis, harum ex suscipit rerum nam molestiae enim eligendi tempore inventore consectetur modi asperiores voluptas earum cum fugit hic. Numquam delectus, labore voluptatem ullam alias natus!`,
+
+            `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est eveniet doloremque aspernatur modi sunt iusto labore ducimus eos quae, numquam consectetur eum earum hic veritatis nisi nesciunt maxime quam error eaque. Magnam a ducimus vitae repudiandae doloribus quaerat, cum ratione dolorum provident excepturi pariatur aliquid ut laboriosam tempora tempore distinctio! Quod magnam, voluptatum iste dicta praesentium neque fuga sed illum deleniti laudantium ipsam molestias facere earum! Aspernatur aperiam veniam at sunt incidunt saepe, reprehenderit veritatis, harum ex suscipit rerum nam molestiae enim eligendi tempore inventore consectetur modi asperiores voluptas earum cum fugit hic. Numquam delectus, labore voluptatem ullam alias natus!`,
+
+        ],
+    },
+
+
+    {
+        name: "learn -nodet",
+        title: "How to build a Node server in 10 minutes",
+        thumbnail: "/images/blog2.jpg",
+        content: [
+            `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est eveniet doloremque aspernatur modi sunt iusto labore ducimus eos quae, numquam consectetur eum earum hic veritatis nisi nesciunt maxime quam error eaque. Magnam a ducimus vitae repudiandae doloribus quaerat, cum ratione dolorum provident excepturi pariatur aliquid ut laboriosam tempora tempore distinctio! Quod magnam, voluptatum iste dicta praesentium neque fuga sed illum deleniti laudantium ipsam molestias facere earum! Aspernatur aperiam veniam at sunt incidunt saepe, reprehenderit veritatis, harum ex suscipit rerum nam molestiae enim eligendi tempore inventore consectetur modi asperiores voluptas earum cum fugit hic. Numquam delectus, labore voluptatem ullam alias natus!`,
+
+            `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est eveniet doloremque aspernatur modi sunt iusto labore ducimus eos quae, numquam consectetur eum earum hic veritatis nisi nesciunt maxime quam error eaque. Magnam a ducimus vitae repudiandae doloribus quaerat, cum ratione dolorum provident excepturi pariatur aliquid ut laboriosam tempora tempore distinctio! Quod magnam, voluptatum iste dicta praesentium neque fuga sed illum deleniti laudantium ipsam molestias facere earum! Aspernatur aperiam veniam at sunt incidunt saepe, reprehenderit veritatis, harum ex suscipit rerum nam molestiae enim eligendi tempore inventore consectetur modi asperiores voluptas earum cum fugit hic. Numquam delectus, labore voluptatem ullam alias natus!`,
+
+        ],
+    },
+
+
+    {
+        name: "my-thoughts-on-learning",
+        title: "My thoughts on Learning Nodejs",
+        thumbnail: "/images/blog3.jpg",
+        content: [
+            `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est eveniet doloremque aspernatur modi sunt iusto labore ducimus eos quae, numquam consectetur eum earum hic veritatis nisi nesciunt maxime quam error eaque. Magnam a ducimus vitae repudiandae doloribus quaerat, cum ratione dolorum provident excepturi pariatur aliquid ut laboriosam tempora tempore distinctio! Quod magnam, voluptatum iste dicta praesentium neque fuga sed illum deleniti laudantium ipsam molestias facere earum! Aspernatur aperiam veniam at sunt incidunt saepe, reprehenderit veritatis, harum ex suscipit rerum nam molestiae enim eligendi tempore inventore consectetur modi asperiores voluptas earum cum fugit hic. Numquam delectus, labore voluptatem ullam alias natus!`,
+
+            `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est eveniet doloremque aspernatur modi sunt iusto labore ducimus eos quae, numquam consectetur eum earum hic veritatis nisi nesciunt maxime quam error eaque. Magnam a ducimus vitae repudiandae doloribus quaerat, cum ratione dolorum provident excepturi pariatur aliquid ut laboriosam tempora tempore distinctio! Quod magnam, voluptatum iste dicta praesentium neque fuga sed illum deleniti laudantium ipsam molestias facere earum! Aspernatur aperiam veniam at sunt incidunt saepe, reprehenderit veritatis, harum ex suscipit rerum nam molestiae enim eligendi tempore inventore consectetur modi asperiores voluptas earum cum fugit hic. Numquam delectus, labore voluptatem ullam alias natus!`,
+
+        ],
+    },
+];
+
+export default articles;
+    -->
+
+    creating and linking the articles list - <br>
+    <!--
+    from articleList.js
+    import React from 'react'
+import articleContent from './Article-content';
+import {Link} from 'react-router-dom';
+import articles from './Article-content';
+
+const ArticlesList = () => {
+  return (
+    <div className='mb-20'>
+        <h1 className='sm:text-4xl text-2xl font-bold my-6 text-gray-900'>Articles</h1>
+
+        <div className='container py-4 mx-auto'>
+            <div className='flex flex-wrap -m-4'>
+              {articleContent.map((article, index) => (
+
+                <div key={index} className="p-4 md:w-1/2">
+
+                  <div className='h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden'>
+                    <Link to={`/article/${article.name}`} >
+                      <img className='lg:h-48 md:h-36 w-full object-cover object-cnter' src={article.thumbnail} alt="something" />
+                    </Link>
+
+                    <div className='p-3'>
+                      <Link key={index} to={`/article/${article.name}`}>
+                        <h3 className='text-lg font-medium text-gray-900 mb-3'>{article.title}</h3>
+                      </Link>
+
+                      <p className='leading-relaxed mb-3'>
+                        {article.content[0].substring(0,100)}...
+                      </p>
+
+                      <div className='flex item-center flex-wrap'>
+                        <Link className='text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0' to={`/article/${article.name}`}>
+                          Learn More
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              ))}
+            </div>
+        </div>   
+    </div>
+  )
+}
+
+export default ArticlesList
+    -->
+
+    Making article list as reusable componenet - <br>
+    <!--
+    from Article.js
+    import React from 'react'
+import {Link} from 'react-router-dom'
+
+const Articles = ({articles}) => {
+  return (
+    <>
+        {articles.map((article, index) => (
+
+        <div key={index} className="p-4 md:w-1/2">
+
+        <div className='h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden'>
+            <Link to={`/article/${article.name}`} >
+            <img className='lg:h-48 md:h-36 w-full object-cover object-cnter' src={article.thumbnail} alt="something" />
+            </Link>
+
+            <div className='p-3'>
+            <Link key={index} to={`/article/${article.name}`}>
+                <h3 className='text-lg font-medium text-gray-900 mb-3'>{article.title}</h3>
+            </Link>
+
+            <p className='leading-relaxed mb-3'>
+                {article.content[0].substring(0,100)}...
+            </p>
+
+            <div className='flex item-center flex-wrap'>
+                <Link className='text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0' to={`/article/${article.name}`}>
+                Learn More
+                </Link>
+            </div>
+            </div>
+        </div>
+
+        </div>
+
+        ))}
+    </>
+  )
+}
+
+export default Articles
+
+from articl.js
+import React from 'react'
+import { useParams } from 'react-router-dom';
+import articleContent from './Article-content';
+
+//components
+import Articles from '../components/Articles';
+
+const Article = () => {
+    const {name} = useParams();
+    const article = articleContent.find((article) => 
+        article.name === name
+    );
+
+
+    if(!article) return <h1>Article does not exist</h1>//if there is not article exist then we will get this message
+
+    const otherArticles = articleContent.filter(article => article.name !== name)
+
+
+  return (
+    <>
+        <h1 className='sm:text-4xl text-2xl font-bold my-6 text-gray-900'>
+            {article.title}
+        </h1>
+        {article.content.map((paragraph, index)=> (
+            <p className='mx-auto leading-relaxed text-base mb-4' key={index}>{paragraph}</p>
+        ))}
+        
+        <h1 className='sm:text-2xl text-xl font-bold my-4 text-gray-900'>
+            Other Articles
+        </h1>
+
+        <div className='flex flex-wrap -m-4'>
+            <Articles articles={otherArticles} />
+        </div>
+    </>
+  );
+};
+
+export default Article
+    -->
+
+
+    Creating a 404 page in React - <br>
+    <!--
+    from NotFound.js
+    import React from 'react'
+
+const NotFound = () => {
+  return (
+    <h1 className='sm:text-4xl text-2xl font-bold my-6 text-gray-900'>404: Page Not Found</h1>
+  )
+}
+
+export default NotFound
+
+from App.js
+import NotFound from "./pages/NotFound";
+<Route path='*' element={<NotFound />} />
+    -->
+
+    /*Backend*/
+
+    Preaparing the Bcakend dependencies - <br>
+    <!--
+        npm install express
+        npm install -D concurrently nodemon
+    -->
+
+    Creating our express app(server.js) - <br>
+    <!--
+    from server.js
+    const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 8000;
+
+app.get('/', (req,res)=> res.send("Hello World Shubham"));
+
+app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
+    -->
+
+    Testing an Express server with Postman - <br>
+    <!--
+    downloading the postman app
+    const express = require('express');
+    const app = express();
+    const PORT = process.env.PORT || 8000;
+
+
+    //initalizing a middleware
+    //we used to have install body parser but now it is middleware
+    app.use(express.json({extended:false}));
+
+    app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
+
+    app.get('/', (req,res)=> res.send("Hello World Shubham get method"));
+    app.post('/', (req,res)=> res.send(`Hello ${req.body.name}`));
+    -->
+
+    Route parameters in Express - <br>
+    <!--
+      getting response with the help of params
+      app.get("/hello/:name", (req,res)=>res.send(`Hello ${req.params.name}`));
+    -->
+
+    Adding comments funtionality - <br>
+    <!--
+      server.js
+      const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 8000;
+
+const articlesInfo = {
+    "learn-react":{
+        comments: [],
+    },
+    "learn-node":{
+        comments: [],
+    },
+    "my-thoughts-on-leraning-react":{
+        comments: [],
+    },
+};
+
+
+//initalizing a middleware
+//we used to have install body parser but now it is middleware
+app.use(express.json({extended:false}));
+app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
+
+app.post('/api/articles/:name/add-comments', (req,res) => {
+    const {username, text} = req.body;
+    const articleName = req.params.name;
+    articlesInfo[articleName].comments.push({username,text});
+    res.status(200).send(articlesInfo[articleName]);
+});
+
+
+// app.get('/', (req,res)=> res.send("Hello World Shubham get method"));
+//getting responses from body techinique
+// app.post('/', (req,res)=> res.send(`Hello ${req.body.name}`));
+
+//getting responses with the help of params techinque
+// app.get("/hello/:name", (req,res)=>res.send(`Hello ${req.params.name}`));
+    -->
+
+
+    Installing MongoDb and creating Database - reamaining<br>
+    <!--
+      download mongodb community server
+      then download miongodb shell
+      then in environment variavles in path section section paste our mongodb folder location till bin
+      then start by mongosh
+      
+
+      
+test> use mmernstackproject
+switched to db mmernstackproject
+mmernstackproject> use mernstackproject
+switched to db mernstackproject
+mernstackproject> db.articles.insert([{name: 'learn-react', comments: []},
+... {name: 'learn-node', comments: []},
+... {name: 'my-thoughts-on-learning-react', comments: []}])
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6389c9760d5bc921cef1db94"),
+    '1': ObjectId("6389c9760d5bc921cef1db95"),
+    '2': ObjectId("6389c9760d5bc921cef1db96")
+  }
+}
+mernstackproject>
+
+
+
+test> use mmernstackproject
+switched to db mmernstackproject
+mmernstackproject> use mernstackproject
+switched to db mernstackproject
+mernstackproject> db.articles.insert([{name: 'learn-react', comments: []},
+... {name: 'learn-node', comments: []},
+... {name: 'my-thoughts-on-learning-react', comments: []}])
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6389c9760d5bc921cef1db94"),
+    '1': ObjectId("6389c9760d5bc921cef1db95"),
+    '2': ObjectId("6389c9760d5bc921cef1db96")
+  }
+}
+mernstackproject> db.articles.find({})
+[
+  {
+    _id: ObjectId("6389c9760d5bc921cef1db94"),
+    name: 'learn-react',
+    comments: []
+  },
+  {
+    _id: ObjectId("6389c9760d5bc921cef1db95"),
+    name: 'learn-node',
+    comments: []
+  },
+  {
+    _id: ObjectId("6389c9760d5bc921cef1db96"),
+    name: 'my-thoughts-on-learning-react',
+    comments: []
+  }
+]
+mernstackproject>
+
+
+
+mernstackproject> db.articles.find({}).pretty()
+[
+  {
+    _id: ObjectId("6389c9760d5bc921cef1db94"),
+    name: 'learn-react',
+    comments: []
+  },
+  {
+    _id: ObjectId("6389c9760d5bc921cef1db95"),
+    name: 'learn-node',
+    comments: []
+  },
+  {
+    _id: ObjectId("6389c9760d5bc921cef1db96"),
+    name: 'my-thoughts-on-learning-react',
+    comments: []
+  }
+]
+mernstackproject>
+
+
+
+mernstackproject> db.articles.find({name : 'learn-react'}).pretty()
+[
+  {
+    _id: ObjectId("6389c9760d5bc921cef1db94"),
+    name: 'learn-react',
+    comments: []
+  }
+]
+mernstackproject>
+
+
+mernstackproject> db.articles.findOne({name: 'learn-react'})
+{
+  _id: ObjectId("6389c9760d5bc921cef1db94"),
+  name: 'learn-react',
+  comments: []
+}
+mernstackproject>
+    -->
+
+
+    adding mongodb to express - <br>
+    <!--
+      const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 8000;
+const {MongoClient} = require("mongodb"); //importing mongo
+
+
+
+//initalizing a middleware
+//we used to have install body parser but now it is middleware
+app.use(express.json({extended:false}));
+
+
+app.get('/api/articles/:name', async (req,res) => {
+
+    try {
+        const articleName = req.params.name;
+        const client = await MongoClient.connect('mongodb://localhost:27017')
+        const db = client.db("mernstackproject")
+        const articleInfo = await db
+        .collection('articles')
+        .findOne({name: articleName});
+        res.status(200).json(articleInfo);
+        client.close();
+        
+    } catch (error) {
+        res.status(500).json({message: "error coonecting to database", error});
+    }
+
+});
+
+
+app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
+
+app.post('/api/articles/:name/add-comments', (req,res) => {
+    const {username, text} = req.body;
+    const articleName = req.params.name;
+    articlesInfo[articleName].comments.push({username,text});
+    res.status(200).send(articlesInfo[articleName]);
+});
+
+
+
+// app.get('/', (req,res)=> res.send("Hello World Shubham get method"));
+//getting responses from body techinique
+// app.post('/', (req,res)=> res.send(`Hello ${req.body.name}`));
+
+//getting responses with the help of params techinque
+// app.get("/hello/:name", (req,res)=>res.send(`Hello ${req.params.name}`));
+    -->
+
+
+
+    rewriting the comments endpoint - <br>
+    <!--
+      start server - npm run server
+      start mongosh - mongosh
+
+
+      const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 8000;
+const {MongoClient} = require("mongodb"); //importing mongo
+
+
+
+//initalizing a middleware
+//we used to have install body parser but now it is middleware
+app.use(express.json({extended:false}));
+
+
+const withDB = async (operations,res) => {
+    try {
+        const client = await MongoClient.connect('mongodb://localhost:27017')
+        const db = client.db("mernstackproject")
+        await operations(db);
+        client.close();
+    } catch (error) {
+        res.status(500).json({message: "error coonecting to database", error});
+    }
+}
+
+app.get("/api/articles/:name", async (req,res) => {
+    withDB(async (db) => {
+        const articleName = req.params.name;
+        const articleInfo = await db
+        .collection('articles')
+        .findOne({name: articleName});
+        res.status(200).json(articleInfo); 
+    }, res);
+
+});
+
+
+
+
+app.post('/api/articles/:name/add-comments', (req,res) => {
+    const {username, text} = req.body;
+    const articleName = req.params.name;
+    
+    withDB(async (db) => {
+        const articleInfo = await db
+        .collection("articles")
+        .findOne({name: articleName});
+        await db.collection("articles").updateOne(
+            {name: articleName},
+            {
+                $set: {
+                    comments: articleInfo.comments.concat({username, text}),
+                },
+            }
+        );
+        const updateArticleInfo = await db
+        .collection("articles")
+        .findOne({name:articleName});
+        res.status(200).json(updateArticleInfo);
+    }, res);
+});
+
+
+app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
+
+
+// app.get('/', (req,res)=> res.send("Hello World Shubham get method"));
+//getting responses from body techinique
+// app.post('/', (req,res)=> res.send(`Hello ${req.body.name}`));
+
+//getting responses with the help of params techinque
+// app.get("/hello/:name", (req,res)=>res.send(`Hello ${req.params.name}`));
+    -->
+
+
+    the fetch api - for making frontend and Backend together - <br>
+    <!--install fetch
+    npm install --save whatwg-fetch
+
+    then write import "whatwg-fetch" in cd client then index.js
+  -->
+
+  adding react hooks to fetch that data - states our stores data<br>
+  <!--
+    article.js
+    import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
+import articleContent from './Article-content';
+//pages
+import NotFound from './NotFound';
+
+//components
+import Articles from '../components/Articles';
+
+const Article = () => {
+    const {name} = useParams();
+    const article = articleContent.find((article) => 
+        article.name === name
+    );
+
+    const [articleInfo, setArticleInfo] = useState({comments: []});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await fetch(`/api/articles/${name}`);
+            const body = await result.json();
+            console.log(body);
+            setArticleInfo(body);
+        };
+        fetchData();
+    }, [name]);
+
+
+    if(!article) return <NotFound />//if there is not article exist then we will get this message
+
+    const otherArticles = articleContent.filter((article) => article.name !== name);
+
+
+  return (
+    <>
+        <h1 className='sm:text-4xl text-2xl font-bold my-6 text-gray-900'>
+            {article.title}
+        </h1>
+        {article.content.map((paragraph, index)=> (
+            <p className='mx-auto leading-relaxed text-base mb-4' key={index}>{paragraph}</p>
+        ))}
+        
+        <h1 className='sm:text-2xl text-xl font-bold my-4 text-gray-900'>
+            Other Articles
+        </h1>
+
+        <div className='flex flex-wrap -m-4'>
+            <Articles articles={otherArticles} />
+        </div>
+    </>
+  );
+};
+
+export default Article
+
+
+package.json from client
+  "private": true,
+  "proxy": "http://localhost:8000",
+
+
+  from package.json
+    "main": "server.js",
+  "scripts": {
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  -->
+
+
+
+  displaying comments - <br>
+  <!--
+    import React from 'react'
+
+const CommentsList = ({comments}) => {
+  return (
+    <>
+        <h3 className='sm:text-2xl text-xl font-bold my-6 text-gray-900'>Comments:</h3>
+        {comments.map((comment, index) => (
+            <div key={index}>
+                <h4 className='text-xl font-bold'>{comment.username}</h4>
+                <p className='mt-1 mb-4'>{comment.text}</p>
+            </div>
+        ))}
+    </>
+  )
+}
+
+export default CommentsList
+
+importing this to article.js
+
+  -->
+
+  Adding an add comment form - <br>
+  <!--
+    AddCommentForm.js
+    
+import React, {useState} from 'react'
+
+const AddCommentForm = ({articleName, setArticleInfo}) => {
+
+    const [username,setUsername] = useState('');
+    const [commentText, setCommentText] = useState('');
+
+    const addComments = async () =>{
+        const result = await fetch(`/api/articles/${articleName}/add-comments`, {
+            method: "post",
+            body:JSON.stringify({username, text:commentText}),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const body = await result.json();
+        setArticleInfo(body);
+        setUsername("");
+        setCommentText("");
+    }
+
+
+  return (
+    <form className='shadow rounded px-8 pt-6 pb-8 mb-4'>
+        <h3 className='text-xl font-bold mb-4 text-gray-900'>Add a Comment</h3>
+
+        <label className='block text-gray-700 text-sm font-bold mb-2'>Name:</label>
+        <input type='text' value={username} onChange={(e) => setUsername(e.target.value)} className='shadow apperance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'/>
+
+        <label className='block text-gray-700 text-sm font-bold mb-2'>Comment:</label>
+        <textarea value={commentText} onChange={(e) => setCommentText(e.target.value)} rows='4' cols='50' className='shadow apperance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'></textarea>
+
+        <button onClick={() => addComments()} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline focus:shadow-outline'>Add Comment</button>
+    </form>
+  )
+}
+
+export default AddCommentForm
+
+
+
+
+article.js
+importing addcommentform here
+<CommentsList comments={articleInfo.comments} />
+
+<AddCommentForm articleName={name} setArticleInfo={setArticleInfo} />
+        
+  -->
+
+
+
+
+
+    
+
+    
+    
+</body>
+</html>
